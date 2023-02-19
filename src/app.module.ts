@@ -5,9 +5,8 @@ import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { validationSchema } from './config/validationSchema';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from './user/entities/user.entity';
 
-
-console.log(`${__dirname}/config/env/.${process.env.NODE_ENV}.env`);
 @Module({
   imports: [
     UserModule, // 유저 모듈 
@@ -23,7 +22,7 @@ console.log(`${__dirname}/config/env/.${process.env.NODE_ENV}.env`);
     username:process.env.DB_NAME,
     password:process.env.DB_PASSWORD,
     database:'test',
-    entities:[],
+    entities:[User],
     synchronize:process.env.DB_SYNCHRONIZE === 'true'
   })],
   controllers: [AppController],

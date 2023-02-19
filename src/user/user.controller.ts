@@ -8,8 +8,8 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
   
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
+  async create(@Body() createUserDto: CreateUserDto) {
+    return await this.userService.createUser(createUserDto);
   }
 
   @Get("/")
@@ -27,8 +27,8 @@ export class UserController {
     return this.userService.update(+id, updateUserDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
+  @Post('/delete')
+  remove(@Body('email') email: string) {
+    return this.userService.deleteUser(email);
   }
 }
